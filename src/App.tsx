@@ -19,14 +19,16 @@ type People = {
 
 enum Url {
   page = "https://swapi.py4e.com/api/people/",
+  firstPage = "https://swapi.py4e.com/api/people/?page=1",
 }
 
 const App = () => {
   const [data, setData] = useState<Result>();
+  const [currentPage, setCurrentPage] = useState<string>(Url.firstPage);
 
   const getFetchedData = () => {
     axios
-      .get(Url.page)
+      .get(currentPage)
       .then((res) => {
         const data = res.data;
         setData(data);
@@ -38,7 +40,25 @@ const App = () => {
 
   useEffect(() => {
     getFetchedData();
-  }, []);
+  }, [currentPage]);
+
+  const onNextClick = () => {
+    const next = data?.next;
+    if (next != null) {
+      setCurrentPage(next);
+    } else {
+      throw new Error("It should not happen! Button should be disabled.");
+    }
+  };
+
+  const onPrevClick = () => {
+    const previous = data?.previous;
+    if (previous != null) {
+      setCurrentPage(previous);
+    } else {
+      throw Error("It should not happen! Button should be disabled.");
+    }
+  };
 
   return (
     <div>
@@ -54,6 +74,12 @@ const App = () => {
           </li>
         ))}
       </ul>
+      <button onClick={onPrevClick} disabled={data?.previous === null}>
+        Previous
+      </button>
+      <button onClick={onNextClick} disabled={data?.next === null}>
+        Next
+      </button>
     </div>
   );
 };
