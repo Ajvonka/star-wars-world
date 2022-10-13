@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -60,8 +60,20 @@ const App = () => {
     }
   };
 
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setCurrentPage(`${Url.page}?search=${e.target.value}`);
+  };
+
   return (
     <div>
+      <div>
+        <input
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          onChange={handleSearch}
+        ></input>
+      </div>
       <ul>
         {data?.results.map((result) => (
           <li key={result.name}>
