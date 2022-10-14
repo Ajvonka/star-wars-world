@@ -1,30 +1,14 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
-import "./App.css";
-
-type Result = {
-  count: number;
-  next: string;
-  previous: string;
-  results: People[];
-};
-
-type People = {
-  name: string;
-  height: string;
-  mass: string;
-  gender: string;
-  url: string;
-};
-
-enum Url {
-  page = "https://swapi.py4e.com/api/people/",
-  firstPage = "https://swapi.py4e.com/api/people/?page=1",
-}
+import SearchField from "./components/controls/SearchField";
+import Button from "./components/controls/Button";
+import { IResult } from "./interfaces/app_interface";
+import { Url } from "./enums/app_enums";
+import Card from "./components/Card";
 
 const App = () => {
-  const [data, setData] = useState<Result>();
-  const [currentPage, setCurrentPage] = useState<string>(Url.firstPage);
+  const [data, setData] = useState<IResult>();
+  const [currentPage, setCurrentPage] = useState<string>(Url.FirstPage);
 
   const getFetchedData = () => {
     axios
@@ -61,37 +45,25 @@ const App = () => {
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setCurrentPage(`${Url.page}?search=${e.target.value}`);
+    setCurrentPage(`${Url.Page}?search=${e.target.value}`);
   };
 
   return (
     <div>
-      <div>
-        <input
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          onChange={handleSearch}
-        ></input>
-      </div>
-      <ul>
-        {data?.results.map((result) => (
-          <li key={result.name}>
-            <img
-              src={`https://starwars-visualguide.com/assets/img/characters/${result.url
-                .replace(Url.page, "")
-                .replace("/", "")}.jpg`}
-            ></img>
-            {result.name} {result.height} {result.mass} {result.gender}
-          </li>
-        ))}
-      </ul>
-      <button onClick={onPrevClick} disabled={data?.previous === null}>
-        Previous
-      </button>
-      <button onClick={onNextClick} disabled={data?.next === null}>
-        Next
-      </button>
+      <SearchField onChange={handleSearch} />
+      <Card data={data}></Card>
+      <Button
+        className="btn-primary"
+        onClick={onPrevClick}
+        disabled={data?.previous === null}
+        title="Previous"
+      />
+      <Button
+        className="btn-primary"
+        onClick={onNextClick}
+        disabled={data?.next === null}
+        title="Next"
+      />
     </div>
   );
 };
