@@ -1,14 +1,18 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import SearchField from "./components/controls/SearchField";
-import Button from "./components/controls/Button";
 import { IResult } from "./interfaces/app_interface";
 import { Url } from "./enums/app_enums";
 import Card from "./components/Card";
+import Pagination from "./components/Pagination";
 
 const App = () => {
   const [data, setData] = useState<IResult>();
   const [currentPage, setCurrentPage] = useState<string>(Url.FirstPage);
+
+  const setPage = (value: string): void => {
+    setCurrentPage(value);
+  };
 
   const getFetchedData = () => {
     axios
@@ -26,44 +30,20 @@ const App = () => {
     getFetchedData();
   }, [currentPage]);
 
-  const onNextClick = () => {
-    const next = data?.next;
-    if (next != null) {
-      setCurrentPage(next);
-    } else {
-      throw new Error("It should not happen! Button should be disabled.");
-    }
-  };
-
-  const onPrevClick = () => {
-    const previous = data?.previous;
-    if (previous != null) {
-      setCurrentPage(previous);
-    } else {
-      throw Error("It should not happen! Button should be disabled.");
-    }
-  };
-
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentPage(`${Url.Page}?search=${e.target.value}`);
   };
 
   return (
-    <div>
-      <SearchField onChange={handleSearch} />
-      <Card data={data}></Card>
-      <Button
-        className="btn-primary"
-        onClick={onPrevClick}
-        disabled={data?.previous === null}
-        title="Previous"
-      />
-      <Button
-        className="btn-primary"
-        onClick={onNextClick}
-        disabled={data?.next === null}
-        title="Next"
-      />
+    <div className="flex flex-col items-center ">
+      <div className="lg:w-4/6 mb-10 w-full">
+        <div className="rounded-lg flex search-field h-44 w-full pt-5 mb-10">
+          <SearchField onChange={handleSearch} />
+        </div>
+        <Pagination props={data} setPage={setPage} />
+        <Card data={data}></Card>
+        <Pagination props={data} setPage={setPage} />
+      </div>
     </div>
   );
 };
