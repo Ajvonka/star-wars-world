@@ -8,7 +8,7 @@ type Props = {
 
 const Card: FC<Props> = (props) => {
   return (
-    <div>
+    <div className="card">
       <ul>
         {props.data?.results.map((result) => (
           <li key={result.name}>

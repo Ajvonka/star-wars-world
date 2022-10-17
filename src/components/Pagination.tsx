@@ -34,15 +34,21 @@ const Pagination: FC<Props> = ({ props, setPage }) => {
   return (
     <div className="pagination">
       <Button
-        className="btn-pag sm:w-44 w-20"
+        className={
+          props?.previous === null ? "btn-pag-hidden" : "btn-pag-visible"
+        }
         onClick={onPrevClick}
         disabled={props?.previous === null}
         title="Previous Page"
         icon="arrow-left"
         type="sm"
       />
+      <div className="pag-results">
+        <span>Results: {props?.count} items</span>
+      </div>
+
       <Button
-        className="btn-pag sm:w-44 w-20"
+        className={props?.next === null ? "btn-pag-hidden" : "btn-pag-visible"}
         onClick={onNextClick}
         disabled={props?.next === null}
         title="Next Page"

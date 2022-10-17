@@ -7,11 +7,12 @@ type Props = {
 
 const Avatar: FC<Props> = ({ url }) => {
   return (
-    <div>
+    <div className="card-item-avatar">
       <img
         src={`https://starwars-visualguide.com/assets/img/characters/${url
           .replace(Url.Page, "")
           .replace("/", "")}.jpg`}
+        alt=""
       ></img>
     </div>
   );

@@ -35,9 +35,9 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col items-center ">
-      <div className="lg:w-4/6 mb-10 w-full">
-        <div className="rounded-lg flex search-field h-44 w-full pt-5 mb-10">
+    <div className="app">
+      <div className="container">
+        <div className="search-container">
           <SearchField onChange={handleSearch} />
         </div>
         <Pagination props={data} setPage={setPage} />
