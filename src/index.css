@@ -12,7 +12,7 @@
     @apply lg:w-4/6 mb-10 w-full;
   }
   .search-container {
-    @apply rounded-lg flex items-center search-field-bg h-44 w-full mb-10;
+    @apply rounded-lg flex items-center bg-gradient-to-r from-green-300 to-orange-500 h-44 w-full mb-10;
   }
   .search-wrapper {
     @apply w-full px-3;
@@ -21,10 +21,10 @@
     @apply relative inline-block w-full;
   }
   .search-field-input {
-    @apply bg-green-100 border-[#838383] border w-full h-16 px-3 bg-opacity-0 outline-transparent pl-8;
+    @apply bg-transparent border-light-gray border w-full h-16 px-3 outline-transparent pl-8 placeholder-light-gray;
   }
   .search-field-span {
-    @apply absolute inset-y-5 left-0 text-[#838383] pl-2;
+    @apply absolute inset-y-5 left-0 pl-2;
   }
 
   .btn-primary {
@@ -38,16 +38,16 @@
   }
 
   .pagination {
-    @apply flex justify-between lg:px-0 px-3 text-[#d4cfcd];
+    @apply flex justify-between lg:px-0 px-3;
   }
   .btn-pag-visible {
     @apply btn-pag sm:w-44 w-20;
   }
   .btn-pag-hidden {
-    @apply sm:w-44 w-20 bg-[#8b8b8b] opacity-30 text-white;
+    @apply sm:w-44 w-20 bg-slate-600 opacity-40 text-white;
   }
   .pag-results {
-    @apply flex items-center justify-center text-[#afafaf];
+    @apply flex items-center justify-center;
   }
   .card {
     @apply flex lg:px-0 px-3 mt-10;
@@ -56,7 +56,7 @@
     @apply w-full md:grid md:grid-cols-2 md:gap-4;
   }
   .card-item {
-    @apply flex flex-row shadow-lg rounded-lg mb-5 bg-[#434246] w-full sm:h-56 h-32 hover:shadow-2xl sm:hover:bg-[#535552] transition transform  md:hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none;
+    @apply flex flex-row shadow-lg rounded-lg mb-5 bg-gray-500 w-full sm:h-56 h-32 hover:shadow-2xl sm:hover:bg-green-200 transition transform  md:hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none;
   }
   .card-item-avatar {
     @apply items-center overflow-hidden sm:w-44 w-24 sm:h-56 h-32 shrink-0;
@@ -68,48 +68,20 @@
     @apply flex flex-col w-full;
   }
   .card-item-details-name {
-    @apply flex items-center justify-center w-full h-12 bg-[#545257] rounded-tr-lg rounded-br-lg text-[#d4cfcd] px-2;
+    @apply flex items-center justify-center w-full h-12 bg-gray-400 rounded-tr-lg rounded-br-lg px-2;
   }
   .card-item-details-info {
-    @apply flex flex-col justify-center pl-3 h-full text-[#c4bebc];
+    @apply flex flex-col justify-center pl-3 h-full;
   }
 }
 
 @layer base {
   html {
+    @apply bg-gradient-to-r from-purple-800 to-green-800 text-light-gray;
   }
   body {
     @apply font-raleway !important;
   }
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: rgb(47, 47, 63);
-  background: linear-gradient(
-    90deg,
-    rgba(47, 47, 63, 1) 0%,
-    rgba(46, 51, 43, 1) 100%
-  );
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.search-field-bg {
-  background: rgb(152, 89, 37);
-  background: radial-gradient(
-    circle,
-    rgba(152, 89, 37, 0.6979166666666667) 0%,
-    rgba(72, 80, 67, 0.7679446778711485) 100%
-  );
 }
 
 .btn-pag {
